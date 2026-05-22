@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SCENTARA — Parfum Eksklusif</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #f5f0e8;
+      --dark: #1a1510;
+      --gold: #c9a84c;
+      --gold-light: #e8d08a;
+      --warm: #8b6a3e;
+      --text-muted: #7a6a55;
+      --bg-card: #faf7f2;
+      --border: #e2d9cc;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--dark);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 5vw;
+      background: rgba(245, 240, 232, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--dark);
+      text-decoration: none;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 7rem 5vw 4rem;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      right: -10vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 65vw;
+      height: 65vw;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(201,168,76,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-text { animation: fadeUp 1s ease both; }
+
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 1.6rem;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    .hero-desc {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      max-width: 420px;
+      margin-bottom: 2.4rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.9rem 2.2rem;
+      background: var(--dark);
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: background 0.3s, gap 0.3s;
+    }
+
+    .hero-cta:hover { background: var(--gold); gap: 1.2rem; }
+    .hero-cta svg { width: 16px; height: 16px; }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: fadeUp 1s 0.2s ease both;
+    }
+
+    .hero-bottle {
+      width: min(340px, 80vw);
+      height: min(420px, 80vw);
+      background: linear-gradient(135deg, #e8d9c0 0%, #c4a87e 40%, #a07840 100%);
+      border-radius: 40% 40% 30% 30% / 30% 30% 50% 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(160,120,64,0.3), inset 0 1px 0 rgba(255,255,255,0.5);
+    }
+
+    .hero-bottle::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      width: 40px;
+      height: 50px;
+      background: linear-gradient(to bottom, #c4a87e, #a07840);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .hero-bottle-label {
+      background: rgba(245,240,232,0.85);
+      padding: 1.2rem 2rem;
+      text-align: center;
+      border: 1px solid rgba(201,168,76,0.4);
+    }
+
+    .hero-bottle-label p:first-child {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dark);
+      letter-spacing: 0.1em;
+    }
+
+    .hero-bottle-label p:last-child {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .hero-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -10px;
+      background: var(--gold);
+      color: var(--dark);
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.4;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.4);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      text-align: center;
+      padding: 3rem 5vw 1rem;
+      position: relative;
+    }
+
+    .divider::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 5vw;
+      right: 5vw;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--border), transparent);
+    }
+
+    .divider span {
+      position: relative;
+      background: var(--cream);
+      padding: 0 1.5rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    /* ── CATALOG SECTION ── */
+    .catalog {
+      padding: 4rem 5vw 6rem;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.15;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--warm);
+    }
+
+    /* ── PRODUCT GRID ── */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(26,21,16,0.1);
+    }
+
+    .product-card:hover .product-img-inner {
+      transform: scale(1.06);
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 2;
+      background: var(--gold);
+      color: var(--dark);
+      font-size: 0.58rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      font-weight: 500;
+    }
+
+    .product-img-wrap {
+      height: 260px;
+      overflow: hidden;
+      background: linear-gradient(160deg, #ede5d8 0%, #d4c4a8 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-img-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.5s ease;
+    }
+
+    /* SVG Bottle Illustrations */
+    .bottle-svg { width: 110px; height: 180px; }
+
+    .product-body {
+      padding: 1.6rem 1.4rem 1.4rem;
+    }
+
+    .product-category {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .product-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.45rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .product-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .product-size {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+    }
+
+    .product-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .btn-wa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1rem;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: background 0.25s, transform 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-wa:hover { background: #128C7E; transform: translateY(-1px); }
+
+    .btn-web {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.7rem 1rem;
+      background: transparent;
+      color: var(--dark);
+      text-decoration: none;
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 400;
+      border: 1px solid var(--dark);
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-web:hover {
+      background: var(--dark);
+      color: var(--cream);
+      transform: translateY(-1px);
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      background: var(--dark);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 4rem;
+      animation: marquee 20s linear infinite;
+      white-space: nowrap;
+    }
+
+    .marquee-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-style: italic;
+      color: var(--gold-light);
+      flex-shrink: 0;
+      letter-spacing: 0.05em;
+    }
+
+    .marquee-dot {
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 6rem 5vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      background: var(--dark);
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact::before {
+      content: '';
+      position: absolute;
+      left: -20vw;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 60vw;
+      height: 60vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.4rem;
+    }
+
+    .contact-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .contact-desc {
+      font-size: 0.88rem;
+      line-height: 1.9;
+      color: rgba(245,240,232,0.6);
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.4rem;
+      border: 1px solid rgba(201,168,76,0.3);
+      text-decoration: none;
+      color: var(--cream);
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .contact-link:hover {
+      background: rgba(201,168,76,0.1);
+      border-color: var(--gold);
+    }
+
+    .contact-link-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-link-icon.wa { background: #25D366; }
+    .contact-link-icon.ig { background: linear-gradient(135deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); }
+    .contact-link-icon.web { background: var(--gold); }
+    .contact-link-icon.email { background: var(--warm); }
+
+    .contact-link-info { flex: 1; }
+
+    .contact-link-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+
+    .contact-link-value {
+      font-size: 0.9rem;
+    }
+
+    /* Map / Decorative block */
+    .contact-visual {
+      position: relative;
+    }
+
+    .contact-card {
+      background: rgba(245,240,232,0.05);
+      border: 1px solid rgba(201,168,76,0.2);
+      padding: 2.5rem;
+    }
+
+    .contact-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--gold-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .info-row {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.2rem;
+      padding-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(245,240,232,0.08);
+      align-items: flex-start;
+    }
+
+    .info-row:last-child { border-bottom: none; margin-bottom: 0; }
+
+    .info-icon {
+      width: 32px;
+      height: 32px;
+      border: 1px solid rgba(201,168,76,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold);
+    }
+
+    .info-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 3px;
+    }
+
+    .info-value {
+      font-size: 0.85rem;
+      color: rgba(245,240,232,0.75);
+      line-height: 1.6;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0e0b08;
+      color: rgba(245,240,232,0.4);
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      border-top: 1px solid rgba(201,168,76,0.15);
+    }
+
+    footer .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      color: var(--gold);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 6rem 5vw 3rem; text-align: center; }
+      .hero-desc { margin-left: auto; margin-right: auto; }
+      .hero-cta { margin: 0 auto; }
+      .hero-stats { justify-content: center; }
+      .hero-visual { order: -1; }
+      .contact { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a class="nav-logo" href="#">SCENT<span>ARA</span></a>
+  <ul class="nav-links">
+    <li><a href="#catalog">Koleksi</a></li>
+    <li><a href="#contact">Kontak</a></li>
+    <li><a href="https://wa.me/6281234567890">WhatsApp</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-eyebrow">✦ Parfum Eksklusif — Jakarta</p>
+    <h1 class="hero-title">
+      Kenakan<br/><em>Aroma</em> yang<br/>Tak Terlupakan
+    </h1>
+    <p class="hero-desc">
+      Setiap botol menyimpan sebuah kisah. Temukan wewangian sejati dari bahan pilihan premium — diciptakan untuk mereka yang menghargai keindahan dalam setiap detailnya.
+    </p>
+    <a href="#catalog" class="hero-cta">
+      Jelajahi Koleksi
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="1" y1="8" x2="15" y2="8"/><polyline points="9,2 15,8 9,14"/></svg>
+    </a>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Pelanggan Puas</div>
+      </div>
+      <div>
+        <div class="stat-num">48</div>
+        <div class="stat-label">Varian Aroma</div>
+      </div>
+      <div>
+        <div class="stat-num">5★</div>
+        <div class="stat-label">Rating Toko</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-bottle">
+      <div class="hero-bottle-label">
+        <p>SCENTARA</p>
+        <p>Parfum de Luxe</p>
+      </div>
+      <div class="hero-badge">New<br/>Collection<br/>2025</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Oud Mystique <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Rose de Minuit <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Amber Noir <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Vanilla Séduction <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Cedarwood Forest <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Iris Blanc <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Oud Mystique <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Rose de Minuit <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Amber Noir <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Vanilla Séduction <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Cedarwood Forest <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">Iris Blanc <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- ── CATALOG ── -->
+<section class="catalog" id="catalog">
+  <div class="section-header">
+    <p class="section-eyebrow">✦ Pilihan Kami</p>
+    <h2 class="section-title">Koleksi <em>Signature</em> 2025</h2>
+  </div>
+
+  <div class="product-grid">
+
+    <!-- Card 1 -->
+    <div class="product-card">
+      <span class="product-badge">Terlaris</span>
+      <div class="product-img-wrap">
+        <div class="product-img-inner">
+          <svg class="bottle-svg" viewBox="0 0 110 180" xmlns="http://www.w3.org/2000/svg">
+            <rect x="40" y="5" width="30" height="28" rx="4" fill="#8B6A3E"/>
+            <rect x="46" y="2" width="18" height="10" rx="3" fill="#6B4E2E"/>
+            <ellipse cx="55" cy="60" rx="32" ry="12" fill="#C4A87E"/>
+            <rect x="23" y="57" width="64" height="105" rx="8" fill="url(#g1)"/>
+            <rect x="32" y="80" width="46" height="60" rx="2" fill="rgba(245,240,232,0.7)"/>
+            <text x="55" y="105" text-anchor="middle" font-family="serif" font-size="8" fill="#1a1510">SCENTARA</text>
+            <text x="55" y="118" text-anchor="middle" font-family="serif" font-size="6" fill="#8B6A3E">OUD MYSTIQUE</text>
+            <text x="55" y="130" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#7a6a55">50 ml • EDP</text>
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D4B896"/><stop offset="50%" stop-color="#E8D5BA"/><stop offset="100%" stop-color="#C4A070"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Oriental · Woody</p>
+        <h3 class="product-name">Oud Mystique</h3>
+        <p class="product-desc">Perpaduan oud Arab yang dalam, cendana hangat, dan sedikit vanilin manis. Tahan lama hingga 12 jam.</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 450.000</div>
+          <div class="product-size">50 ml · EDP</div>
+        </div>
+        <div class="product-actions">
+          <a href="https://wa.me/6281234567890?text=Halo%20Scentara%2C%20saya%20ingin%20memesan%20Oud%20Mystique%2050ml" class="btn-wa" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Beli via WhatsApp
+          </a>
+          <a href="#" class="btn-web">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Beli via Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="product-card">
+      <span class="product-badge" style="background:var(--dark);color:var(--gold)">New</span>
+      <div class="product-img-wrap" style="background:linear-gradient(160deg,#f2e8f0 0%,#dfc8e0 100%)">
+        <div class="product-img-inner">
+          <svg class="bottle-svg" viewBox="0 0 110 180" xmlns="http://www.w3.org/2000/svg">
+            <rect x="42" y="4" width="26" height="26" rx="13" fill="#9B6B9B"/>
+            <rect x="47" y="1" width="16" height="9" rx="3" fill="#7B4B7B"/>
+            <ellipse cx="55" cy="58" rx="28" ry="10" fill="#C8A0C8"/>
+            <rect x="27" y="55" width="56" height="108" rx="28" fill="url(#g2)"/>
+            <rect x="35" y="82" width="40" height="52" rx="2" fill="rgba(255,255,255,0.65)"/>
+            <text x="55" y="104" text-anchor="middle" font-family="serif" font-size="7" fill="#4a1a4a">SCENTARA</text>
+            <text x="55" y="116" text-anchor="middle" font-family="serif" font-size="5.5" fill="#9B6B9B">ROSE DE MINUIT</text>
+            <text x="55" y="127" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#7a5a7a">30 ml • EDP</text>
+            <defs><linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D8B8D8"/><stop offset="50%" stop-color="#EDD8ED"/><stop offset="100%" stop-color="#C8A0C8"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Floral · Powdery</p>
+        <h3 class="product-name">Rose de Minuit</h3>
+        <p class="product-desc">Mawar Bulgaria tengah malam dipadu iris akar dan musk putih lembut. Feminin, misterius, memukau.</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 380.000</div>
+          <div class="product-size">30 ml · EDP</div>
+        </div>
+        <div class="product-actions">
+          <a href="https://wa.me/6281234567890?text=Halo%20Scentara%2C%20saya%20ingin%20memesan%20Rose%20de%20Minuit%2030ml" class="btn-wa" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Beli via WhatsApp
+          </a>
+          <a href="#" class="btn-web">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Beli via Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="product-card">
+      <div class="product-img-wrap" style="background:linear-gradient(160deg,#2a2018 0%,#4a3520 100%)">
+        <div class="product-img-inner">
+          <svg class="bottle-svg" viewBox="0 0 110 180" xmlns="http://www.w3.org/2000/svg">
+            <rect x="38" y="5" width="34" height="22" rx="3" fill="#8B7355"/>
+            <rect x="44" y="2" width="22" height="8" rx="2" fill="#6B5535"/>
+            <ellipse cx="55" cy="55" rx="30" ry="9" fill="#B89860"/>
+            <rect x="25" y="52" width="60" height="112" rx="4" fill="url(#g3)"/>
+            <rect x="33" y="78" width="44" height="58" rx="2" fill="rgba(245,230,200,0.15)"/>
+            <text x="55" y="103" text-anchor="middle" font-family="serif" font-size="8" fill="#E8D5A0">SCENTARA</text>
+            <text x="55" y="115" text-anchor="middle" font-family="serif" font-size="6" fill="#C9A84C">AMBER NOIR</text>
+            <text x="55" y="126" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#8B7355">100 ml • EDP</text>
+            <defs><linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#3A2C1C"/><stop offset="100%" stop-color="#1A1008"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Amber · Gourmand</p>
+        <h3 class="product-name">Amber Noir</h3>
+        <p class="product-desc">Amber resin gelap bertemu kayu hitam dan tembakau ringan. Sillage kuat, cocok untuk malam hari dan acara formal.</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 650.000</div>
+          <div class="product-size">100 ml · EDP</div>
+        </div>
+        <div class="product-actions">
+          <a href="https://wa.me/6281234567890?text=Halo%20Scentara%2C%20saya%20ingin%20memesan%20Amber%20Noir%20100ml" class="btn-wa" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Beli via WhatsApp
+          </a>
+          <a href="#" class="btn-web">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Beli via Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="product-card">
+      <span class="product-badge" style="background:#e8d08a;color:#1a1510">Promo</span>
+      <div class="product-img-wrap" style="background:linear-gradient(160deg,#f5f0e0 0%,#e8dbc0 100%)">
+        <div class="product-img-inner">
+          <svg class="bottle-svg" viewBox="0 0 110 180" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="55" cy="32" rx="14" ry="20" fill="#C9A84C"/>
+            <ellipse cx="55" cy="14" rx="8" ry="5" fill="#A08030"/>
+            <ellipse cx="55" cy="68" rx="32" ry="10" fill="#E8D08A"/>
+            <rect x="23" y="65" width="64" height="100" rx="32" fill="url(#g4)"/>
+            <rect x="34" y="88" width="42" height="50" rx="2" fill="rgba(255,255,255,0.6)"/>
+            <text x="55" y="109" text-anchor="middle" font-family="serif" font-size="7" fill="#5a3e10">SCENTARA</text>
+            <text x="55" y="120" text-anchor="middle" font-family="serif" font-size="5.5" fill="#8B6A3E">VANILLA SÉDUCTION</text>
+            <text x="55" y="131" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#7a6a55">50 ml • EDP</text>
+            <defs><linearGradient id="g4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#D4B870"/><stop offset="50%" stop-color="#EDD898"/><stop offset="100%" stop-color="#C4A850"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Gourmand · Sweet</p>
+        <h3 class="product-name">Vanilla Séduction</h3>
+        <p class="product-desc">Vanilin Madagaskar, tonka bean, dan karamel lembut. Manis namun tidak berlebihan — seperti pelukan hangat.</p>
+        <div class="product-footer">
+          <div>
+            <div class="product-price">Rp 320.000</div>
+            <div style="font-size:0.72rem;text-decoration:line-through;color:var(--text-muted)">Rp 400.000</div>
+          </div>
+          <div class="product-size">50 ml · EDP</div>
+        </div>
+        <div class="product-actions">
+          <a href="https://wa.me/6281234567890?text=Halo%20Scentara%2C%20saya%20ingin%20memesan%20Vanilla%20Séduction%2050ml" class="btn-wa" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Beli via WhatsApp
+          </a>
+          <a href="#" class="btn-web">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Beli via Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="product-card">
+      <div class="product-img-wrap" style="background:linear-gradient(160deg,#e8f0e8 0%,#c8d8c0 100%)">
+        <div class="product-img-inner">
+          <svg class="bottle-svg" viewBox="0 0 110 180" xmlns="http://www.w3.org/2000/svg">
+            <rect x="43" y="5" width="24" height="24" rx="12" fill="#5A7A5A"/>
+            <rect x="48" y="2" width="14" height="8" rx="4" fill="#3A5A3A"/>
+            <ellipse cx="55" cy="57" rx="26" ry="9" fill="#8AAA7A"/>
+            <rect x="29" y="54" width="52" height="110" rx="6" fill="url(#g5)"/>
+            <rect x="36" y="80" width="38" height="54" rx="2" fill="rgba(255,255,255,0.5)"/>
+            <text x="55" y="101" text-anchor="middle" font-family="serif" font-size="7" fill="#1a3a1a">SCENTARA</text>
+            <text x="55" y="113" text-anchor="middle" font-family="serif" font-size="5.5" fill="#5A7A5A">CEDARWOOD</text>
+            <text x="55" y="123" text-anchor="middle" font-family="serif" font-size="5.5" fill="#5A7A5A">FOREST</text>
+            <text x="55" y="133" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#5a6a55">50 ml • EDP</text>
+            <defs><linearGradient id="g5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7A9870"/><stop offset="50%" stop-color="#A8C898"/><stop offset="100%" stop-color="#6A8860"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Fresh · Green</p>
+        <h3 class="product-name">Cedarwood Forest</h3>
+        <p class="product-desc">Cendana Oregon, eucalyptus segar, vetiver bumi. Aromaterapi hutan dalam satu semprotan — menenangkan.</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 420.000</div>
+          <div class="product-size">50 ml · EDT</div>
+        </div>
+        <div class="product-actions">
+          <a href="https://wa.me/6281234567890?text=Halo%20Scentara%2C%20saya%20ingin%20memesan%20Cedarwood%20Forest%2050ml" class="btn-wa" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Beli via WhatsApp
+          </a>
+          <a href="#" class="btn-web">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Beli via Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="product-card">
+      <span class="product-badge" style="background:var(--dark);color:var(--gold)">Limited</span>
+      <div class="product-img-wrap" style="background:linear-gradient(160deg,#f0f0f5 0%,#d8d8e8 100%)">
+        <div class="product-img-inner">
+          <svg class="bottle-svg" viewBox="0 0 110 180" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="55,2 68,28 55,24 42,28" fill="#9090B0"/>
+            <ellipse cx="55" cy="58" rx="25" ry="8" fill="#B0B0D0"/>
+            <rect x="30" y="52" width="50" height="112" rx="2" fill="url(#g6)"/>
+            <line x1="30" y1="80" x2="80" y2="80" stroke="rgba(144,144,176,0.5)" stroke-width="0.5"/>
+            <line x1="30" y1="130" x2="80" y2="130" stroke="rgba(144,144,176,0.5)" stroke-width="0.5"/>
+            <rect x="36" y="85" width="38" height="40" rx="1" fill="rgba(255,255,255,0.4)"/>
+            <text x="55" y="101" text-anchor="middle" font-family="serif" font-size="7" fill="#1a1a2a">SCENTARA</text>
+            <text x="55" y="112" text-anchor="middle" font-family="serif" font-size="5.5" fill="#6060A0">IRIS BLANC</text>
+            <text x="55" y="122" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#8080A0">75 ml • EDP</text>
+            <defs><linearGradient id="g6" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#D0D0E8"/><stop offset="50%" stop-color="#E8E8F5"/><stop offset="100%" stop-color="#B8B8D0"/></linearGradient></defs>
+          </svg>
+        </div>
+      </div>
+      <div class="product-body">
+        <p class="product-category">Floral · Chypre</p>
+        <h3 class="product-name">Iris Blanc</h3>
+        <p class="product-desc">Iris Florence yang murni, bergamot Italia, dan musk kasmir. Elegan, bersih, tak lekang waktu.</p>
+        <div class="product-footer">
+          <div class="product-price">Rp 580.000</div>
+          <div class="product-size">75 ml · EDP</div>
+        </div>
+        <div class="product-actions">
+          <a href="https://wa.me/6281234567890?text=Halo%20Scentara%2C%20saya%20ingin%20memesan%20Iris%20Blanc%2075ml" class="btn-wa" target="_blank">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+            Beli via WhatsApp
+          </a>
+          <a href="#" class="btn-web">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Beli via Website
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section class="contact" id="contact">
+  <div>
+    <p class="contact-eyebrow">✦ Hubungi Kami</p>
+    <h2 class="contact-title">
+      Ada Pertanyaan?<br/>Kami Siap<br/><em>Membantu</em>
+    </h2>
+    <p class="contact-desc">
+      Tim kami dengan senang hati membantu Anda menemukan aroma yang sempurna. Konsultasi gratis, pengiriman ke seluruh Indonesia.
+    </p>
+    <div class="contact-links">
+      <a href="https://wa.me/6281234567890" class="contact-link" target="_blank">
+        <div class="contact-link-icon wa">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">WhatsApp</div>
+          <div class="contact-link-value">+62 812-3456-7890</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="1" y1="8" x2="15" y2="8"/><polyline points="9,2 15,8 9,14"/></svg>
+      </a>
+
+      <a href="https://instagram.com/scentara.id" class="contact-link" target="_blank">
+        <div class="contact-link-icon ig">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="white" stroke-width="1.5"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="white" stroke-width="1.5"/></svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Instagram</div>
+          <div class="contact-link-value">@scentara.id</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="1" y1="8" x2="15" y2="8"/><polyline points="9,2 15,8 9,14"/></svg>
+      </a>
+
+      <a href="https://scentara.id" class="contact-link" target="_blank">
+        <div class="contact-link-icon web">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1a1510" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Website</div>
+          <div class="contact-link-value">www.scentara.id</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="1" y1="8" x2="15" y2="8"/><polyline points="9,2 15,8 9,14"/></svg>
+      </a>
+
+      <a href="mailto:hello@scentara.id" class="contact-link">
+        <div class="contact-link-icon email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="contact-link-info">
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-value">hello@scentara.id</div>
+        </div>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="1" y1="8" x2="15" y2="8"/><polyline points="9,2 15,8 9,14"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-visual">
+    <div class="contact-card">
+      <p class="contact-card-title">Informasi Toko</p>
+      <div class="info-row">
+        <div class="info-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Alamat</div>
+          <div class="info-value">Jl. Kemang Raya No. 88,<br/>Jakarta Selatan 12730</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Jam Operasional</div>
+          <div class="info-value">Senin – Sabtu: 10.00 – 20.00<br/>Minggu: 11.00 – 18.00</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Pengiriman</div>
+          <div class="info-value">Same-day delivery Jakarta<br/>Seluruh Indonesia via JNE / J&T</div>
+        </div>
+      </div>
+      <div class="info-row">
+        <div class="info-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div>
+          <div class="info-label">Garansi</div>
+          <div class="info-value">100% produk original<br/>Garansi pengembalian 7 hari</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <span class="logo">SCENTARA</span>
+  <span>© 2025 Scentara. All rights reserved.</span>
+  <span>Jakarta, Indonesia</span>
+</footer>
+
+</body>
+</html>
